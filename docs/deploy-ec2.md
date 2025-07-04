@@ -12,7 +12,7 @@ docker pull cmcoutosilva/olist-db:latest
 
 ```bash
 # Download the setup script
-curl -o setup_db.sh https://raw.githubusercontent.com/cmcoutosilva/olist-db/main/scripts/setup_db.sh
+curl -o setup_db.sh https://raw.githubusercontent.com/cmcouto-silva/olist-db/refs/heads/main/scripts/setup_db.sh
 chmod +x setup_db.sh
 
 # Run the security setup
@@ -36,6 +36,7 @@ sudo docker compose up -d
 ### 4. Access credentials
 
 Check the `.env` file for connection details:
+
 ```bash
 cat .env
 ```

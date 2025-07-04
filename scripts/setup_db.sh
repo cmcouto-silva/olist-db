@@ -70,6 +70,10 @@ CREATE USER ${READONLY_USER} WITH PASSWORD '${READONLY_PASSWORD}';
 -- Grant connect privileges
 GRANT CONNECT ON DATABASE olist_ecommerce TO ${READONLY_USER};
 
+-- Create schemas (will be populated later by data loader)
+CREATE SCHEMA IF NOT EXISTS ecommerce;
+CREATE SCHEMA IF NOT EXISTS marketing;
+
 -- Grant usage on schemas
 GRANT USAGE ON SCHEMA ecommerce TO ${READONLY_USER};
 GRANT USAGE ON SCHEMA marketing TO ${READONLY_USER};
