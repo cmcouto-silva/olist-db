@@ -1,3 +1,6 @@
+-- Enable pgvector extension
+CREATE EXTENSION IF NOT EXISTS vector;
+
 DROP SCHEMA IF EXISTS marketing CASCADE;
 CREATE SCHEMA marketing;
 

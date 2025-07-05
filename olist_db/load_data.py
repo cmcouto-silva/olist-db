@@ -47,7 +47,7 @@ TABLE_COLUMNS = {
 # Analysis: closed_deals has 462 seller_ids that don't exist in ecommerce.sellers
 TABLES_WITH_DUPLICATES = {
     "ecommerce.order_reviews",  # 827 duplicate review_ids out of 100,000 records
-    "marketing.closed_deals",   # 462 invalid seller_id references out of 842 records
+    "marketing.closed_deals",  # 462 invalid seller_id references out of 842 records
 }
 
 

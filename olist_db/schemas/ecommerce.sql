@@ -1,3 +1,6 @@
+-- Enable pgvector extension
+CREATE EXTENSION IF NOT EXISTS vector;
+
 DROP SCHEMA IF EXISTS ecommerce CASCADE;
 CREATE SCHEMA ecommerce;
 
@@ -34,6 +37,7 @@ CREATE TABLE ecommerce.geolocation
 );
 
 COMMENT ON TABLE ecommerce.geolocation IS 'This dataset has information Brazilian zip codes and its lat/lng coordinates. Use it to plot maps and find distances between sellers and customers.';
+COMMENT ON COLUMN ecommerce.geolocation.geolocation_id IS 'Surrogate key for geolocation entries';
 COMMENT ON COLUMN ecommerce.geolocation.geolocation_zip_code_prefix IS 'first 5 digits of zip code';
 COMMENT ON COLUMN ecommerce.geolocation.geolocation_lat IS 'latitude';
 COMMENT ON COLUMN ecommerce.geolocation.geolocation_lng IS 'longitude';
@@ -44,8 +48,8 @@ COMMENT ON COLUMN ecommerce.geolocation.geolocation_state IS 'state';
 DROP TABLE IF EXISTS ecommerce.products CASCADE;
 CREATE TABLE ecommerce.products
 (
-    product_id                    TEXT PRIMARY KEY,    -- unique product identifier
-    product_category_name         TEXT,                -- root category of product, in Portuguese.
+    product_id                   TEXT PRIMARY KEY,    -- unique product identifier
+    product_category_name        TEXT,                -- root category of product, in Portuguese.
     product_name_lenght          INTEGER,             -- number of characters extracted from the product name.
     product_description_lenght   INTEGER,             -- number of characters extracted from the product description.
     product_photos_qty           INTEGER,             -- number of product published photos

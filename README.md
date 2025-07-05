@@ -8,6 +8,7 @@ A simple PostgreSQL database builder for the Olist Brazilian E-commerce dataset,
 - 📝 **Database comments**: Comprehensive table and column documentation
 - 🔧 **Data quality fixes**: Handles duplicate records and referential integrity issues
 - 🐳 **Docker ready**: Easy deployment with Docker and Docker Compose
+- 🚀 **PGVector support**: Vector embeddings and similarity search capabilities
 
 ## Quick Start
 
@@ -17,6 +18,13 @@ A simple PostgreSQL database builder for the Olist Brazilian E-commerce dataset,
 git clone https://github.com/cmcoutosilva/mara-olist-ecommerce-data.git
 cd mara-olist-ecommerce-data
 docker-compose up
+```
+
+### Testing PGVector Setup
+
+```bash
+# Test that pgvector extension is working
+./scripts/test_pgvector.sh
 ```
 
 ### Using Python
@@ -31,6 +39,14 @@ load-olist-ecommerce-data --help
 - **Ecommerce Schema**: 9 tables with customer orders, products, reviews, and payments
 - **Marketing Schema**: 2 tables with marketing qualified leads and closed deals
 - **1.4M+ records** across all tables with proper foreign key relationships
+- **PGVector Extension**: Enabled for vector embeddings and similarity search
+
+## Vector Search Capabilities
+
+- 🔍 **Vector similarity search**: Find similar products, customers, or reviews
+- 📊 **Embedding storage**: Store AI-generated embeddings for any text fields
+- ⚡ **High performance**: HNSW and IVFFlat indexing for fast vector queries
+- 🤖 **AI/ML ready**: Perfect for recommendation systems and semantic search
 
 ## Data Quality Improvements
 

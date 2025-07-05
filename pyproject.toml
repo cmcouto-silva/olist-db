@@ -28,6 +28,11 @@ dependencies = [
 [project.scripts]
 load-olist-ecommerce-data = "olist_db.cli:load_data_cli"
 
+[project.optional-dependencies]
+eda = [
+    "pandas>=2.3.0",
+]
+
 [tool.pytest.ini_options]
 pythonpath = ["olist_db"]
 testpaths = ["tests"]

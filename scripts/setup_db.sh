@@ -30,7 +30,7 @@ EOF
 cat > docker-compose.yml << EOF
 services:
   postgres:
-    image: postgres:17-alpine
+    image: pgvector/pgvector:pg17
     environment:
       POSTGRES_DB: olist_ecommerce
       POSTGRES_USER: postgres
