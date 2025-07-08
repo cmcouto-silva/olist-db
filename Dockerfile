@@ -1,4 +1,5 @@
-# Use Python 3.11 slim image for better performance and security
+# Olist Database Loader with PGVector Support
+# This container loads Brazilian E-commerce data into PostgreSQL with vector extensions
 FROM python:3.11-slim
 
 # Set environment variables
@@ -28,6 +29,7 @@ COPY data/ ./data/
 RUN pip install uv
 
 # Install dependencies using uv
+# Includes psycopg>=3.2.9 with native PGVector support
 RUN uv pip install --system .
 
 # Create a non-root user for security

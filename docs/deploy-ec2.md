@@ -12,7 +12,7 @@ docker pull cmcoutosilva/olist-db:latest
 
 ```bash
 # Download the setup script
-curl -o setup_db.sh https://raw.githubusercontent.com/cmcouto-silva/olist-db/refs/heads/main/scripts/setup_db.sh
+curl -o setup_db.sh https://raw.githubusercontent.com/cmcoutosilva/olist_db/main/scripts/setup_db.sh
 chmod +x setup_db.sh
 
 # Run the security setup
@@ -61,7 +61,7 @@ docker pull cmcoutosilva/olist-db:latest
 ```yaml
 services:
   postgres:
-    image: postgres:17-alpine
+    image: pgvector/pgvector:pg17
     environment:
       POSTGRES_DB: olist_ecommerce
       POSTGRES_USER: postgres
@@ -109,14 +109,16 @@ sudo docker compose up
 
 ## 🎯 Features
 
-- ✅ **PostgreSQL 17** (latest version)
-- ✅ **Alpine Linux** (secure, lightweight)
+- ✅ **PostgreSQL 17 + PGVector** (latest version with vector support)
+- ✅ **Vector embeddings** for AI/ML workloads and similarity search
 - ✅ **Health checks** for reliable startup
 - ✅ **Read-only user** for audience access
 - ✅ **Secure passwords** (when using secure setup)
 - ✅ **1.4M+ records** loaded with integrity constraints
 - ✅ **Automatic duplicate handling**
-- ✅ **Complete schema** with comments
+- ✅ **Complete schema** with comments and foreign keys
+- ✅ **Vector operators** (<->, <#>, <=>) for similarity, dot product, cosine distance
+- ✅ **HNSW and IVFFlat** indexing support for performance
 
 ## 🔒 User Permissions
 
@@ -132,3 +134,39 @@ sudo docker compose up
 - Can SELECT from any table
 - **Cannot** INSERT, UPDATE, DELETE, or DROP
 - Perfect for your audience/students
+
+## 🧪 Testing PGVector
+
+After deployment, verify that PGVector is working:
+
+```bash
+# Download the test script
+curl -o test_pgvector.sh https://raw.githubusercontent.com/cmcoutosilva/olist_db/main/scripts/test_pgvector.sh
+chmod +x test_pgvector.sh
+
+# Run PGVector tests
+./test_pgvector.sh
+```
+
+### Example Vector Operations
+
+```sql
+-- Connect to the database
+psql -h your-ec2-ip -U postgres -d olist_ecommerce
+
+-- Create a table for product embeddings
+CREATE TABLE product_embeddings (
+    product_id TEXT,
+    embedding vector(1536)  -- OpenAI embedding size
+);
+
+-- Example similarity search
+SELECT product_id FROM product_embeddings 
+ORDER BY embedding <-> '[0.1, 0.2, ...]'::vector 
+LIMIT 10;
+
+-- Example cosine similarity
+SELECT product_id FROM product_embeddings 
+ORDER BY embedding <=> '[0.1, 0.2, ...]'::vector 
+LIMIT 10;
+```
