@@ -12,7 +12,7 @@ docker pull cmcoutosilva/olist-db:latest
 
 ```bash
 # Download the setup script
-curl -o setup_db.sh https://raw.githubusercontent.com/cmcoutosilva/olist_db/main/scripts/setup_db.sh
+curl -o setup_db.sh https://raw.githubusercontent.com/cmcouto-silva/olist-db/main/scripts/setup_db.sh
 chmod +x setup_db.sh
 
 # Run the security setup
@@ -30,7 +30,7 @@ This will:
 ### 3. Start the database
 
 ```bash
-sudo docker compose up -d
+docker compose up -d
 ```
 
 ### 4. Access credentials
@@ -95,7 +95,7 @@ volumes:
 ### 3. Run
 
 ```bash
-sudo docker compose up
+docker compose up
 ```
 
 ### 4. Connect
@@ -141,7 +141,7 @@ After deployment, verify that PGVector is working:
 
 ```bash
 # Download the test script
-curl -o test_pgvector.sh https://raw.githubusercontent.com/cmcoutosilva/olist_db/main/scripts/test_pgvector.sh
+curl -o test_pgvector.sh https://raw.githubusercontent.com/cmcouto-silva/olist-db/main/scripts/test_pgvector.sh
 chmod +x test_pgvector.sh
 
 # Run PGVector tests

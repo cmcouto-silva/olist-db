@@ -19,18 +19,18 @@ A simple PostgreSQL database builder for the Olist Brazilian E-commerce dataset,
 docker pull cmcoutosilva/olist-db:latest
 
 # Create docker-compose.yml
-curl -o docker-compose.yml https://raw.githubusercontent.com/cmcoutosilva/olist_db/main/docker-compose.yml
+curl -o docker-compose.yml https://raw.githubusercontent.com/cmcouto-silva/olist-db/main/docker-compose.yml
 
 # Start the database with PGVector support
-docker-compose up
+docker compose up
 ```
 
 ### Using Docker Compose (Development)
 
 ```bash
-git clone https://github.com/cmcoutosilva/olist_db.git
-cd olist_db
-docker-compose up
+git clone https://github.com/cmcouto-silva/olist-db.git
+cd olist-db
+docker compose up
 ```
 
 ### Testing PGVector Setup
@@ -43,7 +43,7 @@ docker-compose up
 ### Using Python
 
 ```bash
-pip install git+https://github.com/cmcoutosilva/olist_db.git
+pip install git+https://github.com/cmcouto-silva/olist-db.git
 load-olist-ecommerce-data --help
 ```
 
@@ -88,8 +88,8 @@ services:
 
 ```bash
 # Clone and build
-git clone https://github.com/cmcoutosilva/olist_db.git
-cd olist_db
+git clone https://github.com/cmcouto-silva/olist-db.git
+cd olist-db
 docker build -t your-username/olist-db .
 
 # Push to your Docker Hub
@@ -102,9 +102,9 @@ See detailed instructions: [Deploy on EC2](docs/deploy-ec2.md)
 
 ```bash
 # Quick EC2 setup
-curl -o setup_db.sh https://raw.githubusercontent.com/cmcoutosilva/olist_db/main/scripts/setup_db.sh
+curl -o setup_db.sh https://raw.githubusercontent.com/cmcouto-silva/olist-db/main/scripts/setup_db.sh
 chmod +x setup_db.sh && ./setup_db.sh
-docker-compose up -d
+docker compose up -d
 ```
 
 ## References

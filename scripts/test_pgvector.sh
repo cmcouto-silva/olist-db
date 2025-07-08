@@ -5,9 +5,9 @@ echo "🚀 PGVector Verification for Olist Database"
 echo "==========================================="
 echo ""
 
-# Check if docker-compose is running
-if ! docker-compose ps | grep -q "postgres.*Up"; then
-    echo "⚠️  Database not running. Please start with: docker-compose up -d"
+# Check if docker compose is running
+if ! docker compose ps | grep -q "postgres.*Up"; then
+    echo "⚠️  Database not running. Please start with: docker compose up -d"
     exit 1
 fi
 
@@ -15,11 +15,11 @@ echo "🔍 Testing pgvector extension..."
 
 # Test 1: Check if extension is installed
 echo "📋 Checking extension installation..."
-EXTENSION_CHECK=$(docker-compose exec -T postgres psql -U postgres -d olist_ecommerce -t -c "SELECT extname FROM pg_extension WHERE extname = 'vector';" | tr -d ' ')
+EXTENSION_CHECK=$(docker compose exec -T postgres psql -U postgres -d olist_ecommerce -t -c "SELECT extname FROM pg_extension WHERE extname = 'vector';" | tr -d ' ')
 
 if [ "$EXTENSION_CHECK" = "vector" ]; then
     echo "✅ pgvector extension is installed"
-    VERSION=$(docker-compose exec -T postgres psql -U postgres -d olist_ecommerce -t -c "SELECT extversion FROM pg_extension WHERE extname = 'vector';" | tr -d ' ')
+    VERSION=$(docker compose exec -T postgres psql -U postgres -d olist_ecommerce -t -c "SELECT extversion FROM pg_extension WHERE extname = 'vector';" | tr -d ' ')
     echo "   Version: $VERSION"
 else
     echo "❌ pgvector extension not found"
@@ -29,7 +29,7 @@ fi
 # Test 2: Test vector operations
 echo ""
 echo "🧮 Testing vector operations..."
-docker-compose exec -T postgres psql -U postgres -d olist_ecommerce << 'EOF'
+docker compose exec -T postgres psql -U postgres -d olist_ecommerce << 'EOF'
 -- Create test table
 CREATE TABLE IF NOT EXISTS pgvector_test (
     id SERIAL PRIMARY KEY,
@@ -75,8 +75,8 @@ EOF
 # Test 3: Check schemas
 echo ""
 echo "📊 Checking database schemas..."
-ECOMMERCE_TABLES=$(docker-compose exec -T postgres psql -U postgres -d olist_ecommerce -t -c "SELECT COUNT(*) FROM information_schema.tables WHERE table_schema = 'ecommerce';" | tr -d ' ')
-MARKETING_TABLES=$(docker-compose exec -T postgres psql -U postgres -d olist_ecommerce -t -c "SELECT COUNT(*) FROM information_schema.tables WHERE table_schema = 'marketing';" | tr -d ' ')
+ECOMMERCE_TABLES=$(docker compose exec -T postgres psql -U postgres -d olist_ecommerce -t -c "SELECT COUNT(*) FROM information_schema.tables WHERE table_schema = 'ecommerce';" | tr -d ' ')
+MARKETING_TABLES=$(docker compose exec -T postgres psql -U postgres -d olist_ecommerce -t -c "SELECT COUNT(*) FROM information_schema.tables WHERE table_schema = 'marketing';" | tr -d ' ')
 
 echo "✅ Ecommerce schema: $ECOMMERCE_TABLES tables"
 echo "✅ Marketing schema: $MARKETING_TABLES tables"
