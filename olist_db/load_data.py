@@ -245,3 +245,12 @@ def load_data_with_config(db_config, data_dir):
             ", ".join(MARKETING_FILE_TABLE_MAPPING.values())
         )
     )
+
+    # Set search path to include both schemas for the database user
+    print("Setting search path for database user...")
+    with postgres_cursor_context(db_config) as cursor:
+        cursor.execute(
+            f"ALTER ROLE {db_config.user} SET search_path TO "
+            "public, ecommerce, marketing;"
+        )
+    print(f"Search path set for user '{db_config.user}'")
